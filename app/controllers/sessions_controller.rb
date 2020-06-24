@@ -2,8 +2,8 @@ class SessionsController < ApplicationController
   def new
   end
 
-  def creae
-        email = params[:session][:email].downcase
+  def create
+    email = params[:session][:email].downcase
     password = params[:session][:password]
     if login(email, password)
       flash[:success] = 'ログインに成功しました。'
@@ -13,12 +13,14 @@ class SessionsController < ApplicationController
       render :new
     end
   end
+
   def destroy
     session[:user_id] = nil
     flash[:success] = 'ログアウトしました。'
     redirect_to root_url
+ 
   end
-  
+
   private
 
   def login(email, password)
